@@ -1,0 +1,5 @@
+# Archivos del ide
+.idea/
+
+# Archivos de Python
+venv/
