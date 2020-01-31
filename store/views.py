@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 from django.contrib import messages
@@ -30,6 +31,8 @@ def login_view(request):
         if user:
             login(request, user)
             messages.success(request, f'Bienvenido {user.username}')
+            if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET['next'])
             return redirect('index')
         else:
             messages.error(request, 'Usuario o contraseña no son validos')
