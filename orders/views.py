@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .utils import get_or_create_order, breadcrumb
-from carts.utils import get_or_create_cart
+from .utils import get_or_create_order, breadcrumb, destroy_order
+from carts.utils import get_or_create_cart, destroy_cart
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from shipping_addresses.models import ShippingAddress
 
@@ -52,3 +53,44 @@ def check_address(request, pk):
 
     order.update_shipping_address(shipping_address)
     return redirect('orders:address')
+
+
+@login_required(login_url='login')
+def confirm(request):
+    cart = get_or_create_cart(request)
+    order = get_or_create_order(cart, request)
+    shipping_address = order.shipping_address
+    if shipping_address is None:
+        return redirect('orders:address')
+    return render(request, 'order/confirm.html', {
+        'cart': cart,
+        'order': order,
+        'shipping_address': shipping_address,
+        'breadcrumb': breadcrumb(address=True, confirmation=True),
+    })
+
+
+@login_required(login_url='login')
+def cancel(request):
+    cart = get_or_create_cart(request)
+    order = get_or_create_order(cart, request)
+    if request.user.id != order.user_id:
+        return redirect('carts:cart')
+    order.cancel()
+    destroy_cart(request)
+    destroy_order(request)
+    messages.error(request, 'Orden Cancelada')
+    return redirect('index')
+
+
+@login_required(login_url='login')
+def complete(request):
+    cart = get_or_create_cart(request)
+    order = get_or_create_order(cart, request)
+    if request.user.id != order.user_id:
+        return redirect('carts:cart')
+    order.complete()
+    destroy_cart(request)
+    destroy_order(request)
+    messages.success(request, 'Compra completada exitosamente')
+    return redirect('index')
