@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col">
+        <div class="h3">
+            Mis Pedidos
+        </div>
+        <div class="">
+            {% for object in object_list %}
+                {% include 'order/snippets/order.html' %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

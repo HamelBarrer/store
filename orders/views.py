@@ -1,12 +1,24 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.query import EmptyQuerySet
+from django.views.generic.list import ListView
 from django.shortcuts import render, get_object_or_404, redirect
 from .utils import get_or_create_order, breadcrumb, destroy_order
 from carts.utils import get_or_create_cart, destroy_cart
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from shipping_addresses.models import ShippingAddress
+from .mails import Mail
 
 
 # Create your views here.
+class OrderListView(LoginRequiredMixin, ListView):
+    login_url = 'index'
+    template_name = 'order/orders.html'
+
+    def get_queryset(self):
+        return self.request.user.orders_completed()
+
+
 @login_required(login_url='login')
 def order(request):
     cart = get_or_create_cart(request)
@@ -90,6 +102,7 @@ def complete(request):
     if request.user.id != order.user_id:
         return redirect('carts:cart')
     order.complete()
+    Mail.send_complete_order(order, request.user)
     destroy_cart(request)
     destroy_order(request)
     messages.success(request, 'Compra completada exitosamente')
