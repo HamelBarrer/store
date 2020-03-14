@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.query import EmptyQuerySet
 from django.views.generic.list import ListView
 from django.shortcuts import render, get_object_or_404, redirect
 from .utils import get_or_create_order, breadcrumb, destroy_order
