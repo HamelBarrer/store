@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="col">
         <div class="h3">
-            Mis Pedidos
+            {% trans 'Mis Pedidos' %}
         </div>
         <div class="">
             {% for object in object_list %}

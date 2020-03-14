@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="col">
         <div class="h3">
-            Nueva Direccion
+            {% trans 'Nueva Direccion' %}
         </div>
         <div class="">
             {% include 'shipping_addresses/snippets/form.html' with message='Crear' %}

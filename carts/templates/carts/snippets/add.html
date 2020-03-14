@@ -1,3 +1,4 @@
+{% load i18n %}
 <form action="{% url 'carts:add' %}" method="post">
     {% csrf_token %}
     <input type="hidden" name="product_id" value="{{ product.id }}">
@@ -7,7 +8,7 @@
         <button type="button" class="btn btn-info" id="add">+</button>
     </div>
     <div class="mt-2">
-        <button type="submit" class="btn btn-warning">Agregar al Carrito</button>
+        <button type="submit" class="btn btn-warning">{% trans 'Agregar al Carrito' %}</button>
     </div>
 </form>
 

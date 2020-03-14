@@ -1,3 +1,4 @@
+{% load i18n %}
 <div class="card">
     <h5 class="card-header"></h5>
     <div class="card-body">
@@ -10,15 +11,15 @@
         </div>
         {% if edit %}
             <div class="mt-2 mb-5">
-            <a href="{% url 'shipping_addresses:update' shipping_address.pk %}" class="btn btn-info">Editar</a>
+            <a href="{% url 'shipping_addresses:update' shipping_address.pk %}" class="btn btn-info">{% trans 'Editar' %}</a>
             {% if shipping_address.default %}
                 <div class="text-info">
-                    Direccion principal
+                    {% trans 'Direccion principal' %}
                 </div>
             {% else %}
-                <a href="{% url 'shipping_addresses:default' shipping_address.pk %}" class="btn btn-warning">Por
-                    defecto</a>
-                <a href="{% url 'shipping_addresses:delete' shipping_address.pk %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'shipping_addresses:default' shipping_address.pk %}" class="btn btn-warning">{% trans 'Por
+                    defecto' %}</a>
+                <a href="{% url 'shipping_addresses:delete' shipping_address.pk %}" class="btn btn-danger">{% trans 'Eliminar' %}</a>
             {% endif %}
         {% endif %}
         </div>

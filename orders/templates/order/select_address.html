@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block breadcrumb %}
     {% include 'order/snippets/breadcrumb.html' %}
 {% endblock %}
 {% block content %}
     <div class="col">
         <div class="h3">
-            Selecciona una direccion de envio
+            {% trans 'Selecciona una direccion de envio' %}
         </div>
         <div class="mt-2">
             {% for shipping_address in shipping_addresses %}
@@ -14,7 +15,7 @@
                         <h5 class="card-title">{{ shipping_address.address }}</h5>
                         <p class="card-title">{{ shipping_address.postal_code }}</p>
                         <a href="{% url 'orders:check_address' shipping_address.pk %}" class="btn btn-warning">
-                            Seleccionar
+                            {% trans 'Seleccionar' %}
                         </a>
                     </div>
                 </div>

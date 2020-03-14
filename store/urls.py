@@ -21,6 +21,7 @@ from . import views
 from products.views import ProductListView
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', ProductListView.as_view(), name='index'),
     path('usuarios/login', views.login_view, name='login'),
     path('usuarios/logout', views.logout_view, name='logout'),

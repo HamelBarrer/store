@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block breadcrumb %}
     {% include 'order/snippets/breadcrumb.html' %}
 {% endblock %}
 {% block content %}
     <div class="col-8">
         <div class="h3">
-            Confirma tu pedido
+            {% trans 'Confirma tu pedido' %}
         </div>
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="font-weight-bold">
-                            Direccion de envio
+                            {% trans 'Direccion de envio' %}
                         </div>
                         <div class="cart-text">
                             {{ shipping_address.address }}
@@ -27,22 +28,13 @@
                             {{ shipping_address.postal_code }}
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="font-weight-bold">
-                            Metodo de Pago
+                            {% trans 'Metodo de Pago' %}
                         </div>
                         <div class="card-text">
-                            Tarjeta terminacion 5930
+                            {% trans 'Tarjeta terminacion 5930' %}
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="font-weight-bold">
-                            Codigo Promocional
-                        </div>
-                        <form>
-                            <input type="text" name="code" value="" class="form-control"
-                                   placeholder="Codigo de Promocion">
-                        </form>
                     </div>
                 </div>
             </div>
@@ -61,7 +53,7 @@
         {% url 'orders:complete' as next_url %}
         {% include 'order/snippets/resume.html' with next_url=next_url %}
         <div class="mt-2">
-            <a href="{% url 'orders:cancel' %}" class="btn btn-danger">Cancelar Orden</a>
+            <a href="{% url 'orders:cancel' %}" class="btn btn-danger">{% trans 'Cancelar Orden' %}</a>
         </div>
     </div>
 {% endblock %}

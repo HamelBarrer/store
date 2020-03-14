@@ -1,30 +1,45 @@
+{% load i18n %}
 {% url 'login' as login %}
 {% url 'register' as register %}
 {% url 'carts:cart' as cart %}
 {% url 'shipping_addresses:shipping_addresses' as shipping_addresses %}
 {% url 'orders:completed' as completed %}
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a href="{% url 'index' %}" class="navbar-brand">Tiendas</a>
+    <a href="{% url 'index' %}" class="navbar-brand">Hanns</a>
     <button type="button" name="button" class="navbar-toggler navbar-toggler-right" data-toggle="collapse"
             data-target="#navb">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse hide" id="navb">
         <ul class="navbar-nav">
+            <form action="{% url 'set_language' %}" method="post" class="form-inline">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language" class="custom-select">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Go" class="btn btn-primary ml-2">
+            </form>
             <li class="nav-item {% if request.path == cart %}active{% endif %}">
                 <a class="nav-link" href="{{ cart }}">
-                    Mi carrito <span class="fas fa-shopping-cart"></span>
+                    {% trans 'Mi carrito' %} <span class="fas fa-shopping-cart"></span>
                 </a>
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item {% if request.path == shipping_addresses %}active{% endif %}">
                     <a class="nav-link" href="{{ shipping_addresses }}">
-                        Mis direcciones <span class="fas fa-location-arrow"></span>
+                        {% trans 'Mis direcciones' %} <span class="fas fa-location-arrow"></span>
                     </a>
                 </li>
                 <li class="nav-item {% if request.path == completed %}active{% endif %}">
                 <a class="nav-link" href="{{ completed }}">
-                    Mis pedidos <span class="fas fa-shipping-fast"></span>
+                    {% trans 'Mis pedidos' %} <span class="fas fa-shipping-fast"></span>
                 </a>
             </li>
             {% endif %}
@@ -33,16 +48,16 @@
             {% if user.is_authenticated %}
                 <li class="navbar-item">
                     <a href="{% url 'logout' %}" class="nav-link">
-                        <span class="fas fa-sign-in-alt"></span> Cerrar Sesion</a>
+                        <span class="fas fa-sign-in-alt"></span> {% trans 'Cerrar Sesion' %}</a>
                 </li>
             {% else %}
                 <li class="navbar-item {% if request.path == login %}active{% endif %}">
                     <a href="{{ login }}" class="nav-link">
-                        <span class="fa fa-user"></span> Iniciar Sesion</a>
+                        <span class="fa fa-user"></span> {% trans 'Iniciar Sesion' %}</a>
                 </li>
                 <li class="navbar-item {% if request.path == register %}active{% endif %}">
                     <a href="{{ register }}" class="nav-link">
-                        <span class="fas fa-user-plus"></span> Registro</a>
+                        <span class="fas fa-user-plus"></span> {% trans 'Registro' %}</a>
                 </li>
             {% endif %}
         </ul>

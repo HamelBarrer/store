@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="col">
         <form method="post">
             {% csrf_token %}
             <div class="h4">
-                ¿Estas seguro de eliminar la direccion?
+                {% trans '¿Estas seguro de eliminar la direccion?' %}
             </div>
             <input type="submit" class="btn btn-danger" value="Eliminar">
         </form>

@@ -1,8 +1,9 @@
 {% load product_extras %}
+{% load i18n %}
 <div class="card">
     <div class="card-body">
         <div class="font-weight-bold">
-            Resumen del Pedido
+            {% trans 'Resumen del Pedido' %}
         </div>
         <div class="">
             <table class="table table-borderless table-sm">
@@ -14,11 +15,11 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Productos:</td>
+                    <td>{% trans 'Productos' %}:</td>
                     <td>{{ cart.total | price_format }}</td>
                 </tr>
                 <tr>
-                    <td>Envio:</td>
+                    <td>{% trans 'Envio' %}:</td>
                     <td>{{ order.shipping_total }}</td>
                 </tr>
                 </tbody>
@@ -27,14 +28,14 @@
         <div class="">
             <hr>
             <div class="font-weight-bold text-danger">
-                Total (Impuesto Incluidos)
+                {% trans 'Total (Impuesto Incluidos)' %}
                 <div class="d-inline-block">
                     {{ order.total | price_format }}
                 </div>
             </div>
         </div>
         <div class="mt-2">
-            <a href="{{ next_url }}" class="btn btn-warning">Confirmar Pedido</a>
+            <a href="{{ next_url }}" class="btn btn-warning">{% trans 'Confirmar Pedido' %}</a>
         </div>
     </div>
 </div>

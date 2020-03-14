@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="col">
         <div class="h3">
-            Mis direcciones
+            {% trans 'Mis direcciones' %}
         </div>
-        <a href="{% url 'shipping_addresses:create' %}">Agregar nueva direccion</a>
+        <a href="{% url 'shipping_addresses:create' %}">{% trans 'Agregar nueva direccion' %}</a>
         <div class="mt-2">
             {% for shipping_address in object_list %}
                 <div class="mt-2">
