@@ -1,5 +1,5 @@
 # Archivos del ide
-.idea/
+.vscode/
 
 # Archivos de Python
 venv/

@@ -21,6 +21,10 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Orden'
+        verbose_name_plural = 'Ordenes'
+
     def __str__(self):
         return self.order_id
 

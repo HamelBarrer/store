@@ -15,6 +15,10 @@ class ShippingAddress(models.Model):
     default = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Direccion de Envio'
+        verbose_name_plural = 'Direcciones de Envio'
+
     def __str__(self):
         return self.postal_code
 

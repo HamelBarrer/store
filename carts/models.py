@@ -18,6 +18,10 @@ class Cart(models.Model):
     total = models.DecimalField(default=0, max_digits=8, decimal_places=3)
     create_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Carrito'
+        verbose_name_plural = 'Carritos'
+
     FEE = 0.19
 
     def __str__(self):
