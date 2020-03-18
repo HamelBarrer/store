@@ -131,8 +131,8 @@ LOCALE_PATHS = (
 
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'elmasacradr92@gmail.com'
-EMAIL_HOST_PASSWORD = 'tengoxbox'
+EMAIL_HOST_USER = 'nijhobolsos@gmail.com'
+EMAIL_HOST_PASSWORD = 'Amo mis hijos3'
 EMAIL_USE_TLS = True
 
 # Static files (CSS, JavaScript, Images)

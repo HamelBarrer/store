@@ -10,7 +10,7 @@
 <body>
 <div class="">
     <h3>Tu pedido ha sido enviado a {{ user.username }}</h3>
-    <p>La cantidad que compro fue {{ orden.shipping_address }}</p>
+    <p>El costo total del pedido fue de {{ orden.total }} y fue enviado a la direccion {{ orden.shipping_address.line1 }}</p>
 </div>
 </body>
 </html>
